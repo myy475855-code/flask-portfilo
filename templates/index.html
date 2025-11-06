@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Home | Muhammad Yousaf Yamin{% endblock %}
+
+{% block content %}
+<section class="hero position-relative text-center text-md-start py-5">
+  <div class="container py-5">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <h1 class="display-4 fw-bold">Hi, I'm <span class="text-primary">Muhammad Yousaf Yamin</span></h1>
+        <p class="lead text-muted mt-3 mb-4">
+          Full Stack Developer specializing in <strong>React</strong>, <strong>Python</strong>, and <strong>Flask</strong>.  
+          I create modern web applications that combine speed, aesthetics, and functionality.
+        </p>
+        <div class="d-flex flex-column flex-sm-row gap-3">
+          <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+            Contact Me
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" 
+             alt="Developer Illustration" class="img-fluid" style="max-height: 320px;">
+      </div>
+    </div>
+  </div>
+  <div class="position-absolute top-0 start-0 w-100 h-100" 
+       style="background: radial-gradient(circle at 20% 30%, rgba(11,99,209,0.05), transparent 60%); z-index:-1;"></div>
+</section>
+{% endblock %}
