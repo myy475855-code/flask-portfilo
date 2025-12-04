@@ -1,8 +1,113 @@
 {% extends "base.html" %}
 {% block title %}Education | Muhammad Yousaf Yamin{% endblock %}
+{% block style %}
+/* Smooth universal transitions */
+#education * {
+  transition: all 0.35s ease-in-out;
+}
 
+/* Section fade-in */
+#education {
+  opacity: 0;
+  animation: educationFade 1.2s ease forwards;
+}
+
+@keyframes educationFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading animation */
+#education h2 {
+  animation: slideDownEdu 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideDownEdu {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards animation & hover */
+#education .card {
+  border-radius: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFade 1.3s ease forwards;
+  animation-delay: 0.3s;
+  position: relative;
+}
+
+@keyframes cardFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card hover effect */
+#education .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Left border highlight animation */
+#education .card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: linear-gradient(180deg, #0b63d1, #2c7cf2);
+  border-radius: 4px;
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: borderGrow 1s ease forwards;
+}
+
+@keyframes borderGrow {
+  to { transform: scaleY(1); }
+}
+
+/* Text animations */
+#education small, #education p {
+  opacity: 0;
+  animation: fadeUpEdu 1.4s ease forwards;
+}
+
+@keyframes fadeUpEdu {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Background subtle glow */
+#education::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(11,99,209,0.08), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  animation: glowEdu 8s infinite alternate ease-in-out;
+}
+
+@keyframes glowEdu {
+  from { transform: scale(1) translate(-10px, -10px); opacity: 0.5; }
+  to { transform: scale(1.2) translate(20px, 15px); opacity: 0.9; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  #education .card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+{% endblock %}
 {% block content %}
-<section id="education" class="py-5 bg-light">
+<section id="education" class="py-5 ">
   <div class="container">
     <div class="text-center mb-5">
       <small class="text-primary fw-bold">EDUCATION</small>
@@ -12,7 +117,7 @@
 
     <div class="row justify-content-center g-4">
       <div class="col-lg-8">
-        <div class="card p-4 border-start border-4 border-primary shadow-sm">
+        <div class="card p-4 mb-4 border-start border-4 border-primary shadow-sm">
           <h5 class="fw-bold mb-1">Bachelor of Science in Computer Science</h5>
           <small class="text-muted">The University of Faisalabad (TUF) — 2024 (Ongoing)</small>
           <p class="text-muted mt-2 mb-0">

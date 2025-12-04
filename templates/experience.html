@@ -1,6 +1,111 @@
 {% extends "base.html" %}
 {% block title %}Experience | Muhammad Yousaf Yamin{% endblock %}
+{% block style %}
+/* Smooth universal transitions */
+#experience * {
+  transition: all 0.35s ease-in-out;
+}
 
+/* Section fade-in */
+#experience {
+  opacity: 0;
+  animation: experienceFade 1.2s ease forwards;
+}
+
+@keyframes experienceFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading animation */
+#experience h2 {
+  animation: slideDownExp 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideDownExp {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards animation & hover */
+#experience .card {
+  border-radius: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeExp 1.3s ease forwards;
+  animation-delay: 0.3s;
+  position: relative;
+}
+
+@keyframes cardFadeExp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card hover effect */
+#experience .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Left border highlight animation */
+#experience .card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: linear-gradient(180deg, #0b63d1, #2c7cf2);
+  border-radius: 4px;
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: borderGrowExp 1s ease forwards;
+}
+
+@keyframes borderGrowExp {
+  to { transform: scaleY(1); }
+}
+
+/* Text animations */
+#experience small, #experience p {
+  opacity: 0;
+  animation: fadeUpExp 1.4s ease forwards;
+}
+
+@keyframes fadeUpExp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle background glow */
+#experience::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(11,99,209,0.08), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  animation: glowExp 8s infinite alternate ease-in-out;
+}
+
+@keyframes glowExp {
+  from { transform: scale(1) translate(-10px, -10px); opacity: 0.5; }
+  to { transform: scale(1.2) translate(20px, 15px); opacity: 0.9; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  #experience .card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+{% endblock %}
 {% block content %}
 <section id="experience" class="py-5">
   <div class="container">

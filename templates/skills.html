@@ -1,8 +1,116 @@
 {% extends "base.html" %}
 {% block title %}Skills | Muhammad Yousaf Yamin{% endblock %}
+{% block style %} 
+/* Smooth universal transitions */
+#skills * {
+  transition: all 0.35s ease-in-out;
+}
 
+/* Section fade-in */
+#skills {
+  opacity: 0;
+  animation: skillsFade 1.2s ease forwards;
+}
+
+@keyframes skillsFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading animation */
+#skills h2 {
+  animation: slideDownSkills 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideDownSkills {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards animation & hover */
+#skills .card {
+  border-radius: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardFadeSkills 1.3s ease forwards;
+  animation-delay: 0.3s;
+  position: relative;
+}
+
+@keyframes cardFadeSkills {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#skills .card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Label and percentage animation */
+#skills .d-flex.justify-content-between span {
+  opacity: 0;
+  animation: fadeUpSkillText 1.5s ease forwards;
+}
+
+@keyframes fadeUpSkillText {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tech stack badges animation */
+#skills .badge {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: badgeFade 1.2s ease forwards;
+}
+
+#skills .badge:nth-child(1) { animation-delay: 0.5s; }
+#skills .badge:nth-child(2) { animation-delay: 0.7s; }
+#skills .badge:nth-child(3) { animation-delay: 0.9s; }
+
+@keyframes badgeFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#skills .badge:hover {
+  background-color: #0b63d1 !important;
+  color: #fff !important;
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(11,99,209,0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Subtle background glow */
+#skills::before {
+  content: "";
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(11,99,209,0.08), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  animation: glowSkills 8s infinite alternate ease-in-out;
+}
+
+@keyframes glowSkills {
+  from { transform: scale(1) translate(-10px, -10px); opacity: 0.5; }
+  to { transform: scale(1.2) translate(20px, 15px); opacity: 0.9; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  #skills .card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+{% endblock %}
 {% block content %}
-<section id="skills" class="py-5 bg-light">
+<section id="skills" class="py-5 ">
   <div class="container">
     <div class="text-center mb-5">
       <small class="text-primary fw-bold">SKILLS</small>

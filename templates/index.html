@@ -1,6 +1,108 @@
 {% extends "base.html" %}
 {% block title %}Home | Muhammad Yousaf Yamin{% endblock %}
+{% block style %} 
+/* Global smooth animation */
+* {
+  transition: all 0.3s ease-in-out;
+}
 
+/* Hero Section Animation */
+.hero {
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading Animation */
+.hero h1 {
+  animation: slideDown 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Paragraph Fade-in */
+.hero p {
+  animation: fadeUp 1.4s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button Styling */
+.hero .btn {
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.4s ease-in-out;
+}
+
+.hero .btn:hover {
+  background: #0b63d1;
+  color: #fff;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(11, 99, 209, 0.3);
+}
+
+/* Image Animation */
+.hero img {
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+
+/* Background Glow Animation */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(11,99,209,0.08), transparent 70%);
+  z-index: -1;
+  filter: blur(40px);
+  animation: slowGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes slowGlow {
+  from { transform: scale(1); opacity: 0.5; }
+  to { transform: scale(1.2); opacity: 0.8; }
+}
+
+/* On Hover Shake Effect (Subtle) */
+.hero:hover img {
+  transform: scale(1.03);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .hero {
+    text-align: center !important;
+  }
+
+  .hero img {
+    display:none;
+  }
+}
+
+{% endblock %}
 {% block content %}
 <section class="hero position-relative text-center text-md-start py-5">
   <div class="container py-5">
