@@ -1,110 +1,200 @@
-{% extends "base.html" %}
-{% block title %}Home | Muhammad Yousaf Yamin{% endblock %}
+  {% extends "base.html" %}
+  {% block title %}Home | Muhammad Yousaf Yamin{% endblock %}
 
-{% block style %} 
-/* Global smooth animation */
-* {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Hero Section Animation */
-.hero {
-  position: relative;
-  overflow: hidden;
-  animation: fadeIn 1.2s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Heading Animation */
-.hero h1 {
-  animation: slideDown 1s ease forwards;
-  opacity: 0;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Paragraph Fade-in */
-.hero p {
-  animation: fadeUp 1.4s ease forwards;
-  opacity: 0;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Button Styling */
-.hero .btn {
-  padding: 12px 32px;
-  border-radius: 50px;
-  font-weight: 600;
-  transition: 0.4s ease-in-out;
-}
-
-.hero .btn:hover {
-  background: #0b63d1;
-  color: #fff;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(11, 99, 209, 0.3);
-}
-
-/* Background Glow Animation */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  background: radial-gradient(circle, rgba(11,99,209,0.08), transparent 70%);
-  z-index: -1;
-  filter: blur(40px);
-  animation: slowGlow 8s ease-in-out infinite alternate;
-}
-
-@keyframes slowGlow {
-  from { transform: scale(1); opacity: 0.5; }
-  to { transform: scale(1.2); opacity: 0.8; }
-}
-
-/* Responsive Enhancements */
-@media (max-width: 768px) {
-  .hero {
-    text-align: center !important;
+  {% block style %}
+  <style>
+  :root {
+    --primary: #4F46E5;
+    --secondary: #3B82F6;
+    --accent: #F59E0B;
+    --bg-dark: #0F172A;
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.18);
+    --text-light: #E0E7FF;
   }
-}
-{% endblock %}
 
-{% block content %}
-<section class="hero position-relative text-center py-5">
-  <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h1 class="display-4 fw-bold">Hi, I'm <span class="text-primary">Muhammad Yousaf Yamin</span></h1>
-        <p class="lead text-muted mt-3 mb-4">
-          I am a Full Stack Developer skilled in creating user-friendly interfaces and building APIs for smooth communication between app components. I work with Python automation and the Flask framework to develop reliable web applications. I enjoy solving problems and stay updated with new technologies to improve user experiences.
+  /* ---------- Hero Section ---------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0F172A, #1E293B);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated background circles */
+  .hero::before,
+  .hero::after,
+  .hero .circle {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--secondary, #3B82F6), transparent 70%);
+    filter: blur(100px);
+    z-index: 0;
+    animation: float 15s linear infinite;
+  }
+
+  .hero::before {
+    top: -120px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .hero::after {
+    bottom: -120px;
+    right: -120px;
+    width: 500px;
+    height: 500px;
+  }
+
+  .hero .circle:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 20%;
+    left: 10%;
+    animation-duration: 12s;
+    background: radial-gradient(circle, var(--accent, #F59E0B), transparent 70%);
+  }
+
+  .hero .circle:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    top: 60%;
+    right: 15%;
+    animation-duration: 18s;
+    background: radial-gradient(circle, var(--primary, #4F46E5), transparent 70%);
+  }
+
+  /* ---------- Glass Card ---------- */
+  .hero-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 3.5rem 3rem;
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(40px);
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(79,70,229,0.25);
+  }
+
+  /* ---------- Text Styling ---------- */
+    .typing {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 3rem;
+      background: linear-gradient(90deg, #1c29e5c0, #6f88e8d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 4px solid var(--secondary); /* Cursor */
+      animation: typing 3.5s steps(30, end) 1 forwards, blink 0.7s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+  .hero p {
+    color: var(--text-light);
+    color:white;
+    font-size: 1.1rem;
+    max-width: 720px;
+    margin: 1.2rem auto 2rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  /* ---------- Buttons ---------- */
+  .hero .btn {
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    opacity: 0;
+    animation: fadeUp 1.3s ease forwards;
+    animation-delay: 0.8s;
+  }
+
+  .hero .btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 14px 30px rgba(79,70,229,0.35);
+    background: var(--secondary);
+  }
+
+  /* ---------- Animations ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes textFade {
+    0% { opacity: 0; transform: translateY(20px);}
+    100% { opacity: 1; transform: translateY(0);}
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0);}
+    50% { transform: translateY(20px) translateX(20px);}
+    100% { transform: translateY(0) translateX(0);}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    .hero-card {
+      padding: 2.5rem 1.8rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+  </style>
+  {% endblock %}
+
+  {% block content %}
+  <section class="hero text-center">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="container">
+      <div class="hero-card mx-auto">
+        <h1 class="display-5 mb-3">
+          <span class="typing">Hi, I'm Muhammad Yousaf Yamin</span>
+        </h1>
+
+        <p>
+          I’m a Full Stack Developer focused on building clean, scalable web
+          applications. I work with Flask, APIs, and Python automation to deliver
+          smooth user experiences and reliable backend systems.
         </p>
+
         <div class="d-flex justify-content-center gap-3">
-          <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+          <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg">
             Contact Me
           </a>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Background radial glow -->
-  <div class="position-absolute top-0 start-0 w-100 h-100" 
-       style="background: radial-gradient(circle at 20% 30%, rgba(11,99,209,0.05), transparent 60%); z-index:-1;">
-  </div>
-</section>
-{% endblock %}
+  </section>
+  {% endblock %}
