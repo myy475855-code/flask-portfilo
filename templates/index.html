@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Home | Muhammad Yousaf Yamin{% endblock %}
+
 {% block style %} 
 /* Global smooth animation */
 * {
@@ -56,17 +57,6 @@
   box-shadow: 0 10px 20px rgba(11, 99, 209, 0.3);
 }
 
-/* Image Animation */
-.hero img {
-  animation: floatUp 3s ease-in-out infinite;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0); }
-}
-
 /* Background Glow Animation */
 .hero::before {
   content: "";
@@ -86,45 +76,35 @@
   to { transform: scale(1.2); opacity: 0.8; }
 }
 
-/* On Hover Shake Effect (Subtle) */
-.hero:hover img {
-  transform: scale(1.03);
-}
-
 /* Responsive Enhancements */
 @media (max-width: 768px) {
   .hero {
     text-align: center !important;
   }
-
-  .hero img {
-    display:none;
-  }
 }
-
 {% endblock %}
+
 {% block content %}
-<section class="hero position-relative text-center text-md-start py-5">
+<section class="hero position-relative text-center py-5">
   <div class="container py-5">
-    <div class="row align-items-center gy-4">
-      <div class="col-lg-7">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
         <h1 class="display-4 fw-bold">Hi, I'm <span class="text-primary">Muhammad Yousaf Yamin</span></h1>
         <p class="lead text-muted mt-3 mb-4">
           I am a Full Stack Developer skilled in creating user-friendly interfaces and building APIs for smooth communication between app components. I work with Python automation and the Flask framework to develop reliable web applications. I enjoy solving problems and stay updated with new technologies to improve user experiences.
         </p>
-        <div class="d-flex flex-column flex-sm-row gap-3">
+        <div class="d-flex justify-content-center gap-3">
           <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
             Contact Me
           </a>
         </div>
       </div>
-      <div class="col-lg-5 text-center">
-        <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" 
-             alt="Developer Illustration" class="img-fluid" style="max-height: 320px;">
-      </div>
     </div>
   </div>
+
+  <!-- Background radial glow -->
   <div class="position-absolute top-0 start-0 w-100 h-100" 
-       style="background: radial-gradient(circle at 20% 30%, rgba(11,99,209,0.05), transparent 60%); z-index:-1;"></div>
+       style="background: radial-gradient(circle at 20% 30%, rgba(11,99,209,0.05), transparent 60%); z-index:-1;">
+  </div>
 </section>
 {% endblock %}
