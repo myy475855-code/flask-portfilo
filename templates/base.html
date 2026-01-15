@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      --primary: #0b63d1;
+      --primary: #1909c8;
       --text-dark: #212529;
     }
 
@@ -153,6 +153,7 @@
       .icon-nav-list li a { width: 3rem; height: 3rem; font-size: 1.3rem; }
       .toggle-arrow { width: 2.5rem; height: 2.5rem; font-size: 1.3rem; }
     }
+    
     {% block style %} {% endblock %}
    </style>
 </head>
@@ -178,6 +179,12 @@
     <i class="bi bi-arrow-left-short"></i>
   </div>
 
+  <!-- UP/DOWN NAV BUTTONS -->
+  <div id="upDownButtons" style="position: fixed; right: 1rem; bottom: 5rem; display: flex; flex-direction: column; gap: 1rem; z-index: 1070;">
+    <button id="scrollUp" class="btn btn-primary"><i class="bi bi-arrow-up"></i></button>
+    <button id="scrollDown" class="btn btn-primary"><i class="bi bi-arrow-down"></i></button>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     © 2026 Muhammad Yousaf Yamin. All rights reserved.
@@ -191,13 +198,22 @@
     const navLinks = document.querySelectorAll('.icon-nav-list li a');
     const sections = document.querySelectorAll('section');
 
-    // Show navbar when arrow clicked
+    const pages = [
+      "{{ url_for('home') }}",
+      "{{ url_for('about') }}",
+      "{{ url_for('skills') }}",
+      "{{ url_for('experience') }}",
+      "{{ url_for('education') }}",
+      "{{ url_for('contact') }}"
+    ];
+
+    // 1️⃣ Show navbar when arrow clicked
     toggleArrow.addEventListener('click', () => {
       navbar.classList.add('show');
       toggleArrow.style.display = 'none';
     });
 
-    // Hide navbar when a nav link is clicked
+    // 2️⃣ Hide navbar when a nav link is clicked
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         navbar.classList.remove('show');
@@ -205,18 +221,50 @@
       });
     });
 
-    // Highlight active icon on scroll
-    function activateNav() {
-      let scrollPos = window.scrollY + window.innerHeight / 2;
-      sections.forEach((section, index) => {
-        if(scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight){
-          navLinks.forEach(link => link.classList.remove('active'));
-          navLinks[index].classList.add('active');
+    // 3️⃣ Highlight active icon according to current page
+    function highlightActiveNav() {
+      const path = window.location.pathname;
+      navLinks.forEach((link, i) => {
+        link.classList.remove('active');
+        if (path === new URL(link.href).pathname) {
+          link.classList.add('active');
         }
       });
     }
-    window.addEventListener('scroll', activateNav);
-    activateNav();
+    highlightActiveNav();
+
+    // 4️⃣ Up/Down scroll buttons
+    document.getElementById('scrollDown').addEventListener('click', () => {
+      const i = pages.indexOf(window.location.pathname);
+      if (pages[i + 1]) window.location.href = pages[i + 1];
+    });
+
+    document.getElementById('scrollUp').addEventListener('click', () => {
+      const i = pages.indexOf(window.location.pathname);
+      if (pages[i - 1]) window.location.href = pages[i - 1];
+    });
+
+    // 5️⃣ Auto next/previous page on scroll
+    let allowScrollUp = true;
+    window.addEventListener("scroll", () => {
+      // AUTO NEXT PAGE (DOWN)
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 5) {
+        const i = pages.indexOf(window.location.pathname);
+        if (pages[i + 1]) window.location.href = pages[i + 1];
+      }
+
+      // AUTO PREVIOUS PAGE (UP)
+      if (window.scrollY <= 5 && allowScrollUp) {
+        allowScrollUp = false; // prevent loop
+        const i = pages.indexOf(window.location.pathname);
+        if (pages[i - 1]) window.location.href = pages[i - 1];
+      }
+    });
+
+    // Reset on page load
+    window.onload = () => allowScrollUp = true;
+
   </script>
+
 </body>
 </html>
